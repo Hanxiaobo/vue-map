@@ -191,10 +191,16 @@ export default {
               return
             }
             if (that.provinces.indexOf(params.name) > -1) {
+              require.ensure([], () => {
+                // let mod = require('../assets/province/' + params.name + '.json')
+                // that.myChart.dispose();
+                // that.drawChina(params.name,mod)
                 import('../assets/province/' + params.name + '.json').then(mod => {
                   that.myChart.dispose();
                   that.drawChina(params.name,mod.default)
-                })    
+                })
+              })
+                    
             }
             params.event.stop()
           })
